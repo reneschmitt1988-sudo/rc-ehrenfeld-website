@@ -1,0 +1,41 @@
+<%- include('../partials/head', { description: 'Impressum des ' + s.legal_name }) %>
+</head>
+<body>
+<%- include('../partials/header') %>
+<main class="seite">
+<h1>Impressum</h1>
+<section>
+<h2>Angaben gemäß § 5 DDG</h2>
+<p><%= s.legal_name %><br><%- util.escapeHtml(s.address).replace(/\n/g, '<br>') %></p>
+</section>
+<section>
+<h2>Vertreten durch den Vorstand</h2>
+<p><%- board.map(b => util.escapeHtml(b.name + ' (' + b.role + ')')).join('<br>') %></p>
+<p>Jedes Vorstandsmitglied vertritt den Verein einzeln.</p>
+</section>
+<section>
+<h2>Kontakt</h2>
+<p>Telefon: <a href="tel:<%= s.phone_link %>"><%= s.phone %></a><br>E-Mail: <a href="mailto:<%= s.email %>"><%= s.email %></a></p>
+</section>
+<section>
+<h2>Registereintrag</h2>
+<p>Eingetragen im Vereinsregister<br><%= s.register %></p>
+</section>
+<section>
+<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+<p><%= s.responsible %><br><%- util.escapeHtml(s.address).replace(/\n/g, '<br>') %></p>
+</section>
+<section>
+<h2>Streitschlichtung</h2>
+<p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+</section>
+<section>
+<h2>Haftung für Inhalte und Links</h2>
+<p>Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine Gewähr. Unsere Seiten enthalten Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p>
+</section>
+<section>
+<h2>Urheberrecht</h2>
+<p>Die durch den Verein erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des Vereins. Die Logos unserer Sponsoren sind Eigentum der jeweiligen Unternehmen.</p>
+</section>
+</main>
+<%- include('../partials/footer') %>

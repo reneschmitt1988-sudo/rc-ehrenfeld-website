@@ -68,15 +68,24 @@ Inline-Styles nur für die zwei Trennlinien der Sektionen.
   blockiert Bots per robots.txt, ohne Zustimmung NICHT scrapen.
 - Datenschutz rechtlich prüfen lassen vor Livegang
 
-## Stufe 2 (geplant): eigenes CMS, kein WordPress
+## Stufe 2 (gebaut, noch nicht deployed): eigenes CMS in cms/
 
-Node.js + SQLite auf demselben Server, nächster freier Port 3004, hinter nginx.
-Admin unter /admin mit Login. Module: News (Vorbericht/Kampfbericht/Verein, mit
-Foto, Entwurf → Freigabe), Termine und Ergebnisse, Trainingszeiten, Sponsoren,
-Trainerteam, Vorstand. Öffentliche Seite wird aus den Daten gerendert, Design
-bleibt exakt wie Stufe 1. Tabellenabruf vom Verband als eigener Baustein, erst nach
-Freigabe. Mobiles Menü, saubere URLs (/aktuelles/slug), Archivseite für Berichte.
-Pflege später durch Vorstand und Trainer, Oberfläche entsprechend einfach.
+Node.js (Express) + better-sqlite3 + EJS, Port 3004 hinter nginx, systemd-Dienst.
+Alle Benutzer sind Admins (Entscheidung René, 26.10.2026). Module: Beiträge mit
+Foto (Entwurf/Veröffentlicht), Kämpfe mit Einzelkämpfen, Tabelle, Training,
+Trainer, Sponsoren, Vorstand, Einstellungen, Benutzer. Öffentliche Seiten werden
+aus der DB gerendert, Design identisch zu Stufe 1 (gleiches style.css in
+cms/public/assets). Seed-Daten = Inhalte von Stufe 1. Anleitung: cms/README.md,
+Deploy-Dateien: deploy/rc-ehrenfeld-cms.service, deploy/nginx-rc-ehrenfeld-cms.conf.
+
+Die statischen Dateien im Repo-Root (index.html usw.) bleiben, bis das CMS auf
+dem Server läuft; danach können sie entfernt werden. Tabellenabruf vom Verband
+weiterhin nur nach Freigabe (offen).
+
+Entwicklung: `cd cms && SESSION_SECRET=$(openssl rand -hex 32) npm start`,
+Admin anlegen mit `npm run create-admin`. End-to-End-Test vor dem Push mit
+Playwright gegen http://127.0.0.1:3004 (Login, Beitrag mit Upload, Kampf,
+Tabelle, Einstellungen, CSRF, Logout).
 
 ## Arbeitsregeln
 

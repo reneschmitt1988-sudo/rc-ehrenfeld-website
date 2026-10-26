@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %> – Verwaltung <%= siteName %></title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/wappen.png" type="image/png">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body class="adm">
+<header class="adm-top">
+<div class="wrap">
+<a class="adm-brand" href="/admin"><img src="/assets/img/wappen.png" alt=""><span>Verwaltung</span></a>
+<% if (typeof user !== 'undefined' && user) { const p = typeof activePath !== 'undefined' ? activePath : ''; %>
+<nav class="adm-nav" aria-label="Verwaltung">
+<a href="/admin/news" class="<%= p === 'news' ? 'aktiv' : '' %>">Beiträge</a>
+<a href="/admin/kaempfe" class="<%= p === 'kaempfe' ? 'aktiv' : '' %>">Kämpfe</a>
+<a href="/admin/tabelle" class="<%= p === 'tabelle' ? 'aktiv' : '' %>">Tabelle</a>
+<a href="/admin/training" class="<%= p === 'training' ? 'aktiv' : '' %>">Training</a>
+<a href="/admin/trainer" class="<%= p === 'trainer' ? 'aktiv' : '' %>">Trainer</a>
+<a href="/admin/sponsoren" class="<%= p === 'sponsoren' ? 'aktiv' : '' %>">Sponsoren</a>
+<a href="/admin/vorstand" class="<%= p === 'vorstand' ? 'aktiv' : '' %>">Vorstand</a>
+<a href="/admin/einstellungen" class="<%= p === 'einstellungen' ? 'aktiv' : '' %>">Einstellungen</a>
+<a href="/admin/benutzer" class="<%= p === 'benutzer' ? 'aktiv' : '' %>">Benutzer</a>
+</nav>
+<div class="adm-user">
+<span><%= user.name %></span>
+<a href="/" target="_blank" rel="noopener" style="color: var(--gelb)">Website ansehen</a>
+<form class="inline-form" method="post" action="/admin/logout"><input type="hidden" name="_csrf" value="<%= csrf %>"><button type="submit">Abmelden</button></form>
+</div>
+<% } %>
+</div>
+</header>
+<main class="adm-main">
+<% if (typeof flash !== 'undefined' && flash) { %><div class="flash"><%= flash %></div><% } %>

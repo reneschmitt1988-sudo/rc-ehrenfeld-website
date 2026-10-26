@@ -1,0 +1,56 @@
+<%- include('_top', { activePath: 'training' }) %>
+<div class="adm-head"><h1>Training</h1></div>
+<form method="post" action="/admin/training/intro" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Einleitung</h2>
+<div class="feld"><textarea name="training_intro"><%= s.training_intro %></textarea></div>
+<div><button class="btn btn-primary btn-klein" type="submit">Speichern</button></div>
+</form>
+
+<% const renderGroup = (g, isNew) => { %>
+<form method="post" action="/admin/training/gruppe/<%= isNew ? 'neu' : g.id %>" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2><%= isNew ? 'Neue Gruppe' : g.name %></h2>
+<div class="zeile">
+<div class="feld"><label>Gruppe</label><input type="text" name="name" value="<%= g.name %>" required placeholder="z. B. Kinder"></div>
+<div class="feld"><label>Untertitel (z. B. Alter)</label><input type="text" name="subtitle" value="<%= g.subtitle %>" placeholder="10 bis 15 Jahre"></div>
+</div>
+<div class="feld"><label>Hinweis unter den Zeiten (optional)</label><input type="text" name="note" value="<%= g.note %>"></div>
+<div class="repeat" id="times-<%= isNew ? 'neu' : g.id %>">
+<div class="row" style="grid-template-columns: 1fr 130px 90px 90px 1fr 40px"><span class="rt">Bezeichnung (optional)</span><span class="rt">Tag</span><span class="rt">Von</span><span class="rt">Bis</span><span class="rt">Halle</span><span></span></div>
+<% for (const t of g.times) { %>
+<div class="row" style="grid-template-columns: 1fr 130px 90px 90px 1fr 40px">
+<input type="text" name="label" value="<%= t.label %>" placeholder="Ringerwiesel, 5 bis 7 Jahre">
+<select name="weekday"><% for (const w of WEEKDAYS) { %><option <%= t.weekday === w ? 'selected' : '' %>><%= w %></option><% } %></select>
+<input type="time" name="time_from" value="<%= t.time_from %>"><input type="time" name="time_to" value="<%= t.time_to %>">
+<input type="text" name="location" value="<%= t.location %>">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+<% } %>
+<template>
+<div class="row" style="grid-template-columns: 1fr 130px 90px 90px 1fr 40px">
+<input type="text" name="label" placeholder="optional">
+<select name="weekday"><% for (const w of WEEKDAYS) { %><option><%= w %></option><% } %></select>
+<input type="time" name="time_from"><input type="time" name="time_to">
+<input type="text" name="location" value="Sporthalle Wasseramselweg, 50829 Köln">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+</template>
+</div>
+<div class="aktionen">
+<button type="button" class="btn btn-grau btn-klein" data-add="times-<%= isNew ? 'neu' : g.id %>">Zeit hinzufügen</button>
+<button class="btn btn-primary btn-klein" type="submit">Gruppe speichern</button>
+</div>
+</form>
+<% if (!isNew) { %>
+<div class="aktionen" style="margin-top: -16px">
+<form method="post" action="/admin/training/gruppe/<%= g.id %>/verschieben" class="inline-form"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="dir" value="up"><button class="btn btn-grau btn-klein" type="submit">↑</button></form>
+<form method="post" action="/admin/training/gruppe/<%= g.id %>/verschieben" class="inline-form"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="dir" value="down"><button class="btn btn-grau btn-klein" type="submit">↓</button></form>
+<form method="post" action="/admin/training/gruppe/<%= g.id %>/loeschen" class="inline-form" data-confirm="Gruppe „<%= g.name %>“ samt Zeiten löschen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-rot btn-klein" type="submit">Gruppe löschen</button></form>
+</div>
+<% } %>
+<% }; %>
+
+<% for (const g of groups) renderGroup(g, false); %>
+<% renderGroup({ name: '', subtitle: '', note: '', times: [] }, true); %>
+<%- include('_bottom') %>

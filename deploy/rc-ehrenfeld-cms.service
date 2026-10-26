@@ -1,0 +1,30 @@
+# systemd-Dienst für das CMS
+# Ablegen unter /etc/systemd/system/rc-ehrenfeld-cms.service
+# Geheimnis liegt in /etc/rc-ehrenfeld-cms.env (siehe README)
+
+[Unit]
+Description=RC Ehrenfeld 1976 e.V. – Website und CMS
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/rc-ehrenfeld/cms
+EnvironmentFile=/etc/rc-ehrenfeld-cms.env
+Environment=NODE_ENV=production
+Environment=PORT=3004
+Environment=DATA_DIR=/var/www/rc-ehrenfeld/cms/data
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+
+# Härtung
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/rc-ehrenfeld/cms/data
+
+[Install]
+WantedBy=multi-user.target

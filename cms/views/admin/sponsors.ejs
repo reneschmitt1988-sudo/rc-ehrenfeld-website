@@ -1,0 +1,41 @@
+<%- include('_top', { activePath: 'sponsoren' }) %>
+<div class="adm-head"><h1>Sponsoren</h1></div>
+<form method="post" action="/admin/sponsoren/intro" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Einleitung</h2>
+<div class="feld"><textarea name="sponsor_intro"><%= s.sponsor_intro %></textarea></div>
+<div><button class="btn btn-primary btn-klein" type="submit">Speichern</button></div>
+</form>
+<% for (const sp of sponsors) { %>
+<form method="post" action="/admin/sponsoren/<%= sp.id %>" enctype="multipart/form-data" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2><%= sp.name %><%= sp.active ? '' : ' (ausgeblendet)' %></h2>
+<div class="zeile">
+<div class="feld"><label>Name</label><input type="text" name="name" value="<%= sp.name %>" required></div>
+<div class="feld"><label>Website (optional)</label><input type="url" name="url" value="<%= sp.url %>" placeholder="https://"></div>
+</div>
+<div class="zeile">
+<div class="feld"><label>Logo</label><% if (sp.logo) { %><img class="bild-vorschau" src="<%= sp.logo %>" alt="" style="max-height: 100px; width: auto; background: #fff; padding: 8px"><% } %><input type="file" name="logo" accept="image/*"><span class="hint">PNG mit transparentem Hintergrund ist ideal.</span></div>
+<div class="feld"><span class="lbl">Sichtbar</span><label class="check"><input type="checkbox" name="active" value="1" <%= sp.active ? 'checked' : '' %>> Auf der Website zeigen</label></div>
+</div>
+<div class="aktionen">
+<button class="btn btn-primary btn-klein" type="submit">Speichern</button>
+</div>
+</form>
+<div class="aktionen" style="margin-top: -16px">
+<form method="post" action="/admin/sponsoren/<%= sp.id %>/verschieben" class="inline-form"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="dir" value="up"><button class="btn btn-grau btn-klein" type="submit">↑</button></form>
+<form method="post" action="/admin/sponsoren/<%= sp.id %>/verschieben" class="inline-form"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="dir" value="down"><button class="btn btn-grau btn-klein" type="submit">↓</button></form>
+<form method="post" action="/admin/sponsoren/<%= sp.id %>/loeschen" class="inline-form" data-confirm="Sponsor „<%= sp.name %>“ löschen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-rot btn-klein" type="submit">Löschen</button></form>
+</div>
+<% } %>
+<form method="post" action="/admin/sponsoren/neu" enctype="multipart/form-data" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Neuer Sponsor</h2>
+<div class="zeile">
+<div class="feld"><label>Name</label><input type="text" name="name" required></div>
+<div class="feld"><label>Website (optional)</label><input type="url" name="url" placeholder="https://"></div>
+<div class="feld"><label>Logo</label><input type="file" name="logo" accept="image/*"></div>
+</div>
+<div class="aktionen"><button class="btn btn-primary btn-klein" type="submit">Anlegen</button></div>
+</form>
+<%- include('_bottom') %>

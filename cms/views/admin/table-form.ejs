@@ -1,0 +1,32 @@
+<%- include('_top', { activePath: 'tabelle' }) %>
+<div class="adm-head"><h1>Tabelle</h1></div>
+<form method="post" action="/admin/tabelle" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<div class="zeile">
+<div class="feld"><label for="table_stand">Stand (wird angezeigt)</label><input type="text" id="table_stand" name="table_stand" value="<%= s.table_stand %>" placeholder="Nach dem 9. Kampftag · Stand: 31.10.2026"></div>
+<div class="feld"><label for="league_url">Link zur Verbandstabelle</label><input type="url" id="league_url" name="league_url" value="<%= s.league_url %>"></div>
+</div>
+<div class="repeat" id="rows">
+<div class="row" style="grid-template-columns: 1fr 55px 55px 55px 55px 70px 70px 80px 50px 40px"><span class="rt">Mannschaft</span><span class="rt">K</span><span class="rt">S</span><span class="rt">U</span><span class="rt">N</span><span class="rt">Wert+</span><span class="rt">Wert−</span><span class="rt">Punkte</span><span class="rt">Wir</span><span></span></div>
+<% rows.forEach((r, i) => { %>
+<div class="row" style="grid-template-columns: 1fr 55px 55px 55px 55px 70px 70px 80px 50px 40px">
+<input type="text" name="team" value="<%= r.team %>">
+<input type="number" name="k" value="<%= r.played %>" min="0"><input type="number" name="s" value="<%= r.won %>" min="0"><input type="number" name="u" value="<%= r.drawn %>" min="0"><input type="number" name="n" value="<%= r.lost %>" min="0">
+<input type="number" name="pf" value="<%= r.points_for %>" min="0"><input type="number" name="pa" value="<%= r.points_against %>" min="0">
+<input type="text" name="tp" value="<%= r.table_points %>">
+<input type="radio" name="own" value="<%= i %>" <%= r.is_own ? 'checked' : '' %> aria-label="Eigene Mannschaft" style="width: 22px; min-height: 22px; justify-self: center">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+<% }) %>
+<template>
+<div class="row" style="grid-template-columns: 1fr 55px 55px 55px 55px 70px 70px 80px 50px 40px">
+<input type="text" name="team"><input type="number" name="k" value="0" min="0"><input type="number" name="s" value="0" min="0"><input type="number" name="u" value="0" min="0"><input type="number" name="n" value="0" min="0"><input type="number" name="pf" value="0" min="0"><input type="number" name="pa" value="0" min="0"><input type="text" name="tp" value="0 : 0"><span></span>
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+</template>
+</div>
+<div class="aktionen"><button type="button" class="btn btn-grau btn-klein" data-add="rows">Zeile hinzufügen</button></div>
+<span class="hint">Reihenfolge der Zeilen = Tabellenplatz. „Wir“ markiert die eigene Mannschaft (gelb hervorgehoben). Zahlen so übernehmen, wie sie beim Verband stehen. Neue Zeilen per Radio-Button markieren geht erst nach dem Speichern.</span>
+<div class="aktionen"><button class="btn btn-primary" type="submit">Tabelle speichern</button></div>
+</form>
+<%- include('_bottom') %>

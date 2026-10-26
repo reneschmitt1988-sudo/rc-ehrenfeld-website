@@ -1,0 +1,20 @@
+</main>
+<script>
+// Wiederholbare Zeilen: Vorlage klonen, Zeile entfernen
+document.querySelectorAll('[data-add]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var list = document.getElementById(btn.getAttribute('data-add'));
+    var tpl = list.querySelector('template');
+    list.insertBefore(tpl.content.cloneNode(true), tpl);
+  });
+});
+document.addEventListener('click', function (e) {
+  var del = e.target.closest('.del');
+  if (del) { del.closest('.row').remove(); }
+});
+document.querySelectorAll('form[data-confirm]').forEach(function (f) {
+  f.addEventListener('submit', function (e) { if (!window.confirm(f.getAttribute('data-confirm'))) e.preventDefault(); });
+});
+</script>
+</body>
+</html>

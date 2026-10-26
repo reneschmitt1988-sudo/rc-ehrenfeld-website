@@ -1,0 +1,30 @@
+<%- include('_top', { activePath: 'news' }) %>
+<div class="adm-head"><h1><%= isNew ? 'Neuer Beitrag' : 'Beitrag bearbeiten' %></h1><a class="link" href="/admin/news">Zurück zur Liste</a></div>
+<form method="post" action="/admin/news/<%= isNew ? 'neu' : post.id %>" enctype="multipart/form-data" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<div class="zeile">
+<div class="feld"><label for="type">Art</label><select id="type" name="type"><% for (const [k, v] of Object.entries(POST_TYPES)) { %><option value="<%= k %>" <%= post.type === k ? 'selected' : '' %>><%= v %></option><% } %></select></div>
+<div class="feld"><label for="date">Datum</label><input type="date" id="date" name="date" value="<%= post.date %>" required></div>
+</div>
+<div class="feld"><label for="title">Überschrift</label><input type="text" id="title" name="title" value="<%= post.title %>" required maxlength="140"></div>
+<div class="feld"><label for="teaser">Anreißer (auf der Startseite, 1–3 Sätze)</label><textarea id="teaser" name="teaser" maxlength="400"><%= post.teaser %></textarea></div>
+<div class="feld"><label for="body">Text</label><textarea id="body" name="body" class="gross"><%= post.body %></textarea><span class="hint">Leerzeile = neuer Absatz. **fett** für Fettdruck. Links werden automatisch anklickbar.</span></div>
+<div class="zeile">
+<div class="feld">
+<label for="image">Foto</label>
+<% if (post.image) { %><img class="bild-vorschau" src="<%= post.image %>" alt=""><label class="check"><input type="checkbox" name="remove_image" value="1"> Foto entfernen</label><% } %>
+<input type="file" id="image" name="image" accept="image/*"><span class="hint">JPG oder PNG, wird automatisch verkleinert. Bitte nur Fotos mit Einverständnis der abgebildeten Personen.</span>
+</div>
+<div class="feld"><label for="image_alt">Bildbeschreibung (für Screenreader und Google)</label><input type="text" id="image_alt" name="image_alt" value="<%= post.image_alt %>" maxlength="200"></div>
+</div>
+<% if (!isNew) { %><div class="feld"><label for="slug">Adresse</label><input type="text" id="slug" name="slug" value="<%= post.slug %>"><span class="hint">Teil der Webadresse: /aktuelles/<%= post.slug %>. Nach Veröffentlichung besser nicht mehr ändern.</span></div><% } %>
+<label class="check"><input type="checkbox" name="published" value="1" <%= post.published ? 'checked' : '' %>> Veröffentlicht (sonst Entwurf, nur hier sichtbar)</label>
+<div class="aktionen">
+<button class="btn btn-primary" type="submit">Speichern</button>
+<% if (!isNew && post.published) { %><a class="btn btn-outline btn-klein" href="/aktuelles/<%= post.slug %>" target="_blank" rel="noopener">Ansehen</a><% } %>
+</div>
+</form>
+<% if (!isNew) { %>
+<form method="post" action="/admin/news/<%= post.id %>/loeschen" data-confirm="Beitrag wirklich löschen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-rot btn-klein" type="submit">Beitrag löschen</button></form>
+<% } %>
+<%- include('_bottom') %>

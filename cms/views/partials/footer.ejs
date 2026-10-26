@@ -1,0 +1,19 @@
+<footer class="footer<%= path === '/' ? '' : ' footer-klein' %>">
+<div class="wrap">
+<div class="footer-brand">
+<span class="name"><%= s.site_name %></span>
+<% if (path === '/') { %>
+<span>Vereinsregister: <%= s.register %></span>
+<span>Vorstand: <%= board.map(b => b.name + ' (' + b.role + ')').join(', ') %></span>
+<% } %>
+</div>
+<div class="footer-links">
+<% if (path !== '/') { %><a href="/">Startseite</a><% } %>
+<% if (path !== '/impressum') { %><a href="/impressum">Impressum</a><% } %>
+<% if (path !== '/datenschutz') { %><a href="/datenschutz">Datenschutz</a><% } %>
+</div>
+</div>
+</footer>
+<% if (path === '/') { %><script src="/assets/js/main.js" defer></script><% } %>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<%- include('../partials/head', { description: 'Datenschutzerklärung des ' + s.legal_name }) %>
+</head>
+<body>
+<%- include('../partials/header') %>
+<main class="seite">
+<h1>Datenschutzerklärung</h1>
+<section>
+<h2>1. Verantwortlicher</h2>
+<p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+<p><%= s.legal_name %><br>vertreten durch den Vorstand<br><%- util.escapeHtml(s.address).replace(/\n/g, '<br>') %><br>Telefon: <a href="tel:<%= s.phone_link %>"><%= s.phone %></a><br>E-Mail: <a href="mailto:<%= s.email %>"><%= s.email %></a></p>
+</section>
+<section>
+<h2>2. Allgemeines</h2>
+<p>Wir nehmen den Schutz Ihrer persönlichen Daten ernst und behandeln sie vertraulich sowie entsprechend der gesetzlichen Datenschutzvorschriften (DSGVO, BDSG) und dieser Datenschutzerklärung. Diese Website verwendet keine Analyse- oder Tracking-Dienste. Ein technisch notwendiges Cookie wird ausschließlich im passwortgeschützten Verwaltungsbereich gesetzt, den nur Vereinsmitglieder mit Zugang nutzen; Besucher der öffentlichen Seiten erhalten kein Cookie.</p>
+</section>
+<section>
+<h2>3. Server-Logfiles</h2>
+<p>Beim Aufruf dieser Website erhebt der Hosting-Anbieter automatisch Informationen, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Browsertyp und -version, Betriebssystem sowie die zuvor besuchte Seite (Referrer). Diese Daten dienen der Sicherstellung eines störungsfreien Betriebs und der Sicherheit der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Logfiles werden nach 14 Tagen gelöscht.</p>
+<p>Hosting-Anbieter: <%= s.hoster %>. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Die Server stehen in Deutschland.</p>
+</section>
+<section>
+<h2>4. Kontaktaufnahme</h2>
+<p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Daten (Name, Kontaktdaten, Inhalt der Anfrage) zur Bearbeitung Ihres Anliegens. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern die Anfrage auf eine Mitgliedschaft oder ein Probetraining zielt, im Übrigen Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+</section>
+<section>
+<h2>5. Schriftarten</h2>
+<p>Diese Website nutzt die Schriftarten Anton, Barlow und Barlow Condensed. Die Schriftarten sind lokal auf unserem Server gespeichert. Es findet keine Verbindung zu Servern von Google oder anderen Anbietern statt.</p>
+</section>
+<section>
+<h2>6. Externe Links</h2>
+<p>Unsere Website enthält Links zu externen Seiten, etwa zum Ringerverband NRW, zu Instagram und zu unseren Sponsoren. Beim Anklicken verlassen Sie unsere Website. Für die Datenverarbeitung auf diesen Seiten ist der jeweilige Betreiber verantwortlich. Inhalte dieser Dienste werden nicht in unsere Website eingebettet; beim bloßen Besuch unserer Seite werden keine Daten an diese Anbieter übermittelt.</p>
+</section>
+<section>
+<h2>7. Ihre Rechte</h2>
+<p>Sie haben das Recht auf Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen die Verarbeitung (Art. 21 DSGVO). Wenden Sie sich dafür an die oben genannten Kontaktdaten.</p>
+<p>Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig für uns ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf.</p>
+</section>
+<section>
+<h2>8. Änderungen</h2>
+<p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, wenn sich die Rechtslage oder unsere Website ändert. Stand: <%= s.privacy_date %>.</p>
+</section>
+</main>
+<%- include('../partials/footer') %>

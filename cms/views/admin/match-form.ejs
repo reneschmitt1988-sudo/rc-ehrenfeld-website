@@ -1,0 +1,73 @@
+<%- include('_top', { activePath: 'kaempfe' }) %>
+<div class="adm-head"><h1><%= isNew ? 'Neuer Kampf' : 'Kampf bearbeiten' %></h1><a class="link" href="/admin/kaempfe">Zurück zur Liste</a></div>
+<form method="post" action="/admin/kaempfe/<%= isNew ? 'neu' : match.id %>" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Kampf</h2>
+<div class="zeile">
+<div class="feld"><label for="date">Datum</label><input type="date" id="date" name="date" value="<%= match.date %>" required></div>
+<div class="feld"><label for="time">Uhrzeit</label><input type="time" id="time" name="time" value="<%= match.time %>"></div>
+<div class="feld"><label for="kampftag">Kampftag</label><input type="text" id="kampftag" name="kampftag" value="<%= match.kampftag %>" placeholder="z. B. 9. Kampftag"></div>
+<div class="feld"><label for="liga">Liga</label><input type="text" id="liga" name="liga" value="<%= match.liga %>"></div>
+</div>
+<div class="zeile">
+<div class="feld"><label for="home">Heim</label><input type="text" id="home" name="home" value="<%= match.home %>" required></div>
+<div class="feld"><label for="away">Gast</label><input type="text" id="away" name="away" value="<%= match.away %>" required></div>
+<div class="feld"><label for="location">Ort / Hinweis</label><input type="text" id="location" name="location" value="<%= match.location %>" placeholder="Heim, Auswärts, Hallenname"></div>
+</div>
+<div class="zeile">
+<div class="feld"><label for="home_score">Punkte Heim</label><input type="number" id="home_score" name="home_score" value="<%= match.home_score ?? '' %>" min="0"><span class="hint">Leer lassen, solange der Kampf noch aussteht.</span></div>
+<div class="feld"><label for="away_score">Punkte Gast</label><input type="number" id="away_score" name="away_score" value="<%= match.away_score ?? '' %>" min="0"></div>
+<div class="feld"><label for="referee">Kampfrichter</label><input type="text" id="referee" name="referee" value="<%= match.referee %>"></div>
+</div>
+
+<h2>Einzelkämpfe</h2>
+<div class="repeat" id="bouts">
+<div class="row" style="grid-template-columns: 90px 1fr 1fr 80px 60px 60px 40px"><span class="rt">Klasse</span><span class="rt">Heim</span><span class="rt">Gast</span><span class="rt">Wertung</span><span class="rt">H</span><span class="rt">G</span><span></span></div>
+<% for (const b of bouts) { %>
+<div class="row" style="grid-template-columns: 90px 1fr 1fr 80px 60px 60px 40px">
+<input type="text" name="wc" value="<%= b.weight_class %>" placeholder="G 57">
+<input type="text" name="hw" value="<%= b.home_wrestler %>">
+<input type="text" name="aw" value="<%= b.away_wrestler %>">
+<select name="rt"><% for (const k of Object.keys(RESULT_TYPES)) { %><option value="<%= k %>" <%= b.result_type === k ? 'selected' : '' %>><%= k || '–' %></option><% } %></select>
+<input type="number" name="hp" value="<%= b.home_points %>" min="0" max="5">
+<input type="number" name="ap" value="<%= b.away_points %>" min="0" max="5">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+<% } %>
+<template>
+<div class="row" style="grid-template-columns: 90px 1fr 1fr 80px 60px 60px 40px">
+<input type="text" name="wc" placeholder="G 57"><input type="text" name="hw"><input type="text" name="aw">
+<select name="rt"><% for (const k of Object.keys(RESULT_TYPES)) { %><option value="<%= k %>"><%= k || '–' %></option><% } %></select>
+<input type="number" name="hp" value="0" min="0" max="5"><input type="number" name="ap" value="0" min="0" max="5">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+</template>
+</div>
+<div><button type="button" class="btn btn-grau btn-klein" data-add="bouts">Einzelkampf hinzufügen</button></div>
+<span class="hint">Klasse: G = griechisch-römisch, F = Freistil, dann Gewichtsklasse. Wertung: SS Schultersieg, TÜ technische Überlegenheit, PS Punktsieg, AS Aufgabesieg, KL kampflos. Leerer Name = kampflos.</span>
+
+<h2>Weitere Ergebnisse des Kampftags</h2>
+<div class="repeat" id="others">
+<% for (const o of others) { %>
+<div class="row" style="grid-template-columns: 1fr 1fr 70px 70px 40px">
+<input type="text" name="oh" value="<%= o.home %>" placeholder="Heim"><input type="text" name="oa" value="<%= o.away %>" placeholder="Gast">
+<input type="number" name="ohs" value="<%= o.home_score %>" min="0"><input type="number" name="oas" value="<%= o.away_score %>" min="0">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+<% } %>
+<template>
+<div class="row" style="grid-template-columns: 1fr 1fr 70px 70px 40px">
+<input type="text" name="oh" placeholder="Heim"><input type="text" name="oa" placeholder="Gast">
+<input type="number" name="ohs" value="0" min="0"><input type="number" name="oas" value="0" min="0">
+<button type="button" class="del" aria-label="Zeile entfernen">×</button>
+</div>
+</template>
+</div>
+<div><button type="button" class="btn btn-grau btn-klein" data-add="others">Ergebnis hinzufügen</button></div>
+
+<div class="aktionen"><button class="btn btn-primary" type="submit">Speichern</button></div>
+</form>
+<% if (!isNew) { %>
+<form method="post" action="/admin/kaempfe/<%= match.id %>/loeschen" data-confirm="Kampf samt Einzelkämpfen löschen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-rot btn-klein" type="submit">Kampf löschen</button></form>
+<% } %>
+<%- include('_bottom') %>

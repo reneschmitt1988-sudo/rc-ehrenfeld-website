@@ -1,0 +1,61 @@
+/* Admin-Bereich RC Ehrenfeld CMS */
+.adm { min-height: 100vh; display: flex; flex-direction: column; background: var(--grund); }
+.adm-top { background: var(--navy); color: var(--grund); }
+.adm-top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-top: 12px; padding-bottom: 12px; }
+.adm-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--cond); font-weight: 700; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; }
+.adm-brand img { height: 40px; width: auto; }
+.adm-nav { display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--cond); font-weight: 600; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; }
+.adm-nav a { text-decoration: none; padding: 8px 0; color: var(--linie); }
+.adm-nav a:hover, .adm-nav a.aktiv { color: var(--gelb); }
+.adm-user { display: flex; align-items: center; gap: 14px; font-size: 15px; color: var(--linie); }
+.adm-user button { background: none; border: 1px solid var(--linie); color: var(--grund); padding: 6px 12px; cursor: pointer; font-family: var(--cond); text-transform: uppercase; letter-spacing: 0.08em; }
+.adm-main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; display: flex; flex-direction: column; gap: 28px; }
+.adm-main h1 { font-size: clamp(36px, 5vw, 56px); }
+.adm-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.flash { background: var(--gelb); color: var(--navy); padding: 12px 18px; font-weight: 600; }
+.fehler { background: #FDE2E1; color: #7A1A14; padding: 12px 18px; font-weight: 600; }
+.box { background: var(--weiss); border: 2px solid var(--navy); padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.box h2 { font-family: var(--cond); font-weight: 700; font-size: 24px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blau); }
+.feld { display: flex; flex-direction: column; gap: 6px; }
+.feld label, .feld .lbl { font-family: var(--cond); font-weight: 700; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); }
+.feld input[type="text"], .feld input[type="url"], .feld input[type="email"], .feld input[type="password"], .feld input[type="date"], .feld input[type="time"], .feld input[type="number"], .feld select, .feld textarea {
+  font: inherit; padding: 10px 12px; border: 2px solid var(--navy); background: var(--weiss); color: var(--navy); min-height: 44px; width: 100%; }
+.feld textarea { min-height: 120px; resize: vertical; }
+.feld textarea.gross { min-height: 280px; }
+.feld .hint { font-size: 14px; color: var(--text-2); }
+.zeile { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; }
+.check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; }
+.check input { width: 22px; height: 22px; }
+.aktionen { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.btn-klein { min-height: 40px; padding: 0 16px; font-size: 16px; }
+.btn-rot { background: #B3261E; color: #fff; }
+.btn-grau { background: var(--hell); color: var(--navy); }
+.liste { width: 100%; font-size: 16px; }
+.liste th { text-align: left; font-family: var(--cond); font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); padding: 8px 10px; border-bottom: 2px solid var(--navy); }
+.liste td { padding: 10px; border-bottom: 1px solid var(--linie); vertical-align: middle; }
+.liste td:first-child, .liste th:first-child { padding-left: 0; }
+.liste td:last-child, .liste th:last-child { padding-right: 0; text-align: right; }
+.liste a.titel { font-weight: 600; text-decoration: none; }
+.liste a.titel:hover { text-decoration: underline; }
+.entwurf { display: inline-block; padding: 2px 8px; background: var(--hell); font-family: var(--cond); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+.online { display: inline-block; padding: 2px 8px; background: #DDF3E4; color: #0E5A2B; font-family: var(--cond); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+.repeat { display: flex; flex-direction: column; gap: 10px; }
+.repeat .row { display: grid; gap: 8px; align-items: center; }
+.repeat .row input, .repeat .row select { font: inherit; padding: 8px 10px; border: 2px solid var(--navy); min-height: 40px; width: 100%; }
+.repeat .row .del { border: 2px solid var(--navy); background: var(--weiss); min-height: 40px; min-width: 40px; cursor: pointer; font-weight: 700; }
+.repeat .row .rt { font-family: var(--cond); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+.bild-vorschau { max-width: 320px; border: 2px solid var(--navy); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px; }
+.stat { background: var(--weiss); border: 2px solid var(--navy); padding: 20px; display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+.stat .zahl { font-family: var(--display); font-size: 44px; line-height: 1; color: var(--blau); }
+.stat .lbl { font-family: var(--cond); font-weight: 700; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); }
+.login { max-width: 420px; margin: 60px auto; }
+.inline-form { display: inline; }
+@media (max-width: 760px) {
+  .adm-main { padding: 20px 16px 48px; }
+  .box { padding: 18px; }
+  .liste thead { display: none; }
+  .liste tr { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--linie); }
+  .liste td { padding: 0; border: 0; }
+  .liste td:last-child { width: 100%; text-align: left; padding-top: 6px; }
+}

@@ -1,0 +1,32 @@
+<%- include('_top', { activePath: 'benutzer' }) %>
+<div class="adm-head"><h1>Benutzer</h1></div>
+<div class="box">
+<table class="liste">
+<thead><tr><th>Name</th><th>E-Mail</th><th>Seit</th><th></th></tr></thead>
+<tbody>
+<% for (const u of users) { %>
+<tr>
+<td><strong><%= u.name %></strong><%= u.id === user.id ? ' (du)' : '' %></td>
+<td><%= u.email %></td>
+<td><%= u.created_at.slice(0, 10) %></td>
+<td>
+<form method="post" action="/admin/benutzer/<%= u.id %>/passwort" class="inline-form" style="display: inline-flex; gap: 6px; align-items: center"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="password" name="password" placeholder="Neues Passwort" minlength="10" style="min-height: 36px; padding: 4px 8px; border: 2px solid var(--navy)"><button class="btn btn-grau btn-klein" type="submit">Setzen</button></form>
+<% if (u.id !== user.id) { %><form method="post" action="/admin/benutzer/<%= u.id %>/loeschen" class="inline-form" data-confirm="Benutzer <%= u.email %> löschen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-rot btn-klein" type="submit">Löschen</button></form><% } %>
+</td>
+</tr>
+<% } %>
+</tbody>
+</table>
+</div>
+<form method="post" action="/admin/benutzer" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Neuen Benutzer anlegen</h2>
+<div class="zeile">
+<div class="feld"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+<div class="feld"><label for="email">E-Mail</label><input type="email" id="email" name="email" required></div>
+<div class="feld"><label for="password">Passwort (mind. 10 Zeichen)</label><input type="password" id="password" name="password" required minlength="10" autocomplete="new-password"></div>
+</div>
+<span class="hint">Alle Benutzer haben volle Rechte. Bitte nur Vorstand und Trainer anlegen, die wirklich pflegen.</span>
+<div class="aktionen"><button class="btn btn-primary" type="submit">Anlegen</button></div>
+</form>
+<%- include('_bottom') %>

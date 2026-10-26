@@ -1,0 +1,14 @@
+<%- include('_top', { user: null }) %>
+<div class="box login">
+<h1 style="font-size: 40px">Anmelden</h1>
+<% if (error) { %><div class="fehler"><%= error %></div><% } %>
+<% if (!hasUsers) { %><div class="fehler">Noch kein Benutzer angelegt. Auf dem Server ausführen: <code>npm run create-admin -- "Name" mail@adresse.de Passwort</code></div><% } %>
+<form method="post" action="/admin/login" style="display: flex; flex-direction: column; gap: 16px">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<input type="hidden" name="next" value="<%= next %>">
+<div class="feld"><label for="email">E-Mail</label><input type="email" id="email" name="email" required autocomplete="username"></div>
+<div class="feld"><label for="password">Passwort</label><input type="password" id="password" name="password" required autocomplete="current-password"></div>
+<button class="btn btn-primary" type="submit">Anmelden</button>
+</form>
+</div>
+<%- include('_bottom') %>

@@ -1,0 +1,60 @@
+<%- include('_top', { activePath: 'einstellungen' }) %>
+<div class="adm-head"><h1>Einstellungen</h1></div>
+<form method="post" action="/admin/einstellungen" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 24px">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+
+<div class="box">
+<h2>Startbereich</h2>
+<div class="feld"><label for="eyebrow">Kleine Zeile über der Überschrift</label><input type="text" id="eyebrow" name="eyebrow" value="<%= s.eyebrow %>"></div>
+<div class="zeile">
+<div class="feld"><label for="hero_title">Große Überschrift (Zeilenumbruch = neue Zeile)</label><textarea id="hero_title" name="hero_title" style="min-height: 70px"><%= s.hero_title %></textarea></div>
+<div class="feld"><label for="hero_accent">Letzte Zeile in Blau</label><input type="text" id="hero_accent" name="hero_accent" value="<%= s.hero_accent %>"></div>
+</div>
+<div class="feld"><label for="hero_text">Einleitungstext</label><textarea id="hero_text" name="hero_text"><%= s.hero_text %></textarea></div>
+<div class="feld"><label for="hero_image">Foto im Startbereich (ersetzt die Mattengrafik, am besten quadratisch)</label>
+<% if (s.hero_image) { %><img class="bild-vorschau" src="<%= s.hero_image %>" alt=""><label class="check"><input type="checkbox" name="remove_hero_image" value="1"> Foto entfernen und Mattengrafik zeigen</label><% } %>
+<input type="file" id="hero_image" name="hero_image" accept="image/*"></div>
+<div class="feld"><label for="meta_description">Beschreibung für Google (max. 160 Zeichen)</label><textarea id="meta_description" name="meta_description" maxlength="200" style="min-height: 70px"><%= s.meta_description %></textarea></div>
+</div>
+
+<div class="box">
+<h2>Vereinsgeschichte</h2>
+<div class="feld"><label for="history_lead">Erster Absatz (hervorgehoben)</label><textarea id="history_lead" name="history_lead"><%= s.history_lead %></textarea></div>
+<div class="feld"><label for="history_text">Weitere Absätze (Leerzeile = neuer Absatz)</label><textarea id="history_text" name="history_text" class="gross"><%= s.history_text %></textarea></div>
+<div class="zeile">
+<div class="feld"><label for="successes">Größte Erfolge (eine Zeile je Eintrag: Jahr|Text)</label><textarea id="successes" name="successes"><%= s.successes %></textarea></div>
+<div class="feld"><label for="alumni">Hier fing es an (ein Name je Zeile)</label><textarea id="alumni" name="alumni"><%= s.alumni %></textarea><input type="text" name="alumni_note" value="<%= s.alumni_note %>" placeholder="Hinweis darunter (optional)" style="margin-top: 8px"></div>
+</div>
+</div>
+
+<div class="box">
+<h2>Mitmachen und Kontakt</h2>
+<div class="feld"><label for="membership_note">Hinweis zum Mitgliedsbeitrag (Schritt 3)</label><input type="text" id="membership_note" name="membership_note" value="<%= s.membership_note %>"></div>
+<div class="zeile">
+<div class="feld"><label for="halls">Trainingshallen (Zeilenumbrüche bleiben)</label><textarea id="halls" name="halls"><%= s.halls %></textarea></div>
+<div class="feld"><label for="contact_name">Ansprechperson</label><input type="text" id="contact_name" name="contact_name" value="<%= s.contact_name %>"><label for="address" style="margin-top: 10px">Anschrift</label><textarea id="address" name="address" style="min-height: 70px"><%= s.address %></textarea></div>
+</div>
+<div class="zeile">
+<div class="feld"><label for="phone">Telefon (Anzeige)</label><input type="text" id="phone" name="phone" value="<%= s.phone %>"></div>
+<div class="feld"><label for="phone_link">Telefon (international, zum Wählen)</label><input type="text" id="phone_link" name="phone_link" value="<%= s.phone_link %>" placeholder="+4917670285171"></div>
+<div class="feld"><label for="email">E-Mail</label><input type="email" id="email" name="email" value="<%= s.email %>"></div>
+<div class="feld"><label for="instagram">Instagram-Name (ohne @)</label><input type="text" id="instagram" name="instagram" value="<%= s.instagram %>"></div>
+</div>
+</div>
+
+<div class="box">
+<h2>Rechtliches</h2>
+<div class="zeile">
+<div class="feld"><label for="site_name">Kurzname (Website)</label><input type="text" id="site_name" name="site_name" value="<%= s.site_name %>"></div>
+<div class="feld"><label for="legal_name">Eingetragener Name (Impressum)</label><input type="text" id="legal_name" name="legal_name" value="<%= s.legal_name %>"></div>
+<div class="feld"><label for="register">Vereinsregister</label><input type="text" id="register" name="register" value="<%= s.register %>"></div>
+<div class="feld"><label for="responsible">Inhaltlich Verantwortlich (MStV)</label><input type="text" id="responsible" name="responsible" value="<%= s.responsible %>"></div>
+<div class="feld"><label for="hoster">Hosting-Anbieter (Datenschutz)</label><input type="text" id="hoster" name="hoster" value="<%= s.hoster %>"></div>
+<div class="feld"><label for="privacy_date">Stand Datenschutzerklärung</label><input type="text" id="privacy_date" name="privacy_date" value="<%= s.privacy_date %>"></div>
+<div class="feld"><label for="base_url">Adresse der Website</label><input type="url" id="base_url" name="base_url" value="<%= s.base_url %>"></div>
+</div>
+</div>
+
+<div class="aktionen"><button class="btn btn-primary" type="submit">Alles speichern</button></div>
+</form>
+<%- include('_bottom') %>

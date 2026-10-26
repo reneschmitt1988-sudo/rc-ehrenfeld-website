@@ -1,0 +1,21 @@
+<%- include('_top', { activePath: pathName }) %>
+<div class="adm-head"><h1><%= title %></h1></div>
+<form method="post" action="/admin/<%= pathName %>" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<div class="repeat" id="rows">
+<div class="row" style="grid-template-columns: 1fr 1fr 40px"><span class="rt"><%= table === 'board' ? 'Funktion' : 'Rolle' %></span><span class="rt">Name</span><span></span></div>
+<% for (const r of rows) { %>
+<div class="row" style="grid-template-columns: 1fr 1fr 40px"><input type="text" name="role" value="<%= r.role %>"><input type="text" name="name" value="<%= r.name %>"><button type="button" class="del" aria-label="Zeile entfernen">×</button></div>
+<% } %>
+<template><div class="row" style="grid-template-columns: 1fr 1fr 40px"><input type="text" name="role" placeholder="<%= table === 'board' ? 'z. B. Beisitzer' : 'z. B. Jugendtrainer' %>"><input type="text" name="name"><button type="button" class="del" aria-label="Zeile entfernen">×</button></div></template>
+</div>
+<div class="aktionen"><button type="button" class="btn btn-grau btn-klein" data-add="rows">Zeile hinzufügen</button></div>
+<% if (table === 'trainers') { %>
+<div class="feld"><label for="trainer_note">Text unter dem Trainerteam</label><textarea id="trainer_note" name="trainer_note"><%= s.trainer_note %></textarea></div>
+<span class="hint">Gleiche Rollen werden auf der Website zusammengefasst, Reihenfolge wie hier.</span>
+<% } else { %>
+<span class="hint">Reihenfolge wie hier. Erscheint in der Fußzeile und im Impressum. Bitte nach jeder Vorstandswahl aktualisieren.</span>
+<% } %>
+<div class="aktionen"><button class="btn btn-primary" type="submit">Speichern</button></div>
+</form>
+<%- include('_bottom') %>

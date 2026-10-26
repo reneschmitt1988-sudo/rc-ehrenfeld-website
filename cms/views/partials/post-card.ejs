@@ -1,0 +1,13 @@
+<article class="news">
+<% if (post.image) { %>
+<a href="/aktuelles/<%= post.slug %>"><img src="<%= post.image %>" alt="<%= post.image_alt %>" loading="lazy" style="object-position: center 40%"></a>
+<% } else { %>
+<div class="bild-platz" aria-hidden="true"><img src="/assets/img/wappen.png" alt="" style="height: 90px; width: auto; opacity: .5"></div>
+<% } %>
+<div class="news-body">
+<div class="news-meta"><span class="tag<%= post.type === 'kampfbericht' ? ' tag-bericht' : (post.type === 'verein' ? ' tag-verein' : '') %>"><%= util.POST_TYPES[post.type] || post.type %></span><time class="muted" datetime="<%= post.date %>"><%= util.formatDate(post.date) %></time></div>
+<h3><a href="/aktuelles/<%= post.slug %>" style="text-decoration: none"><%= post.title %></a></h3>
+<p><%= post.teaser %></p>
+<a class="link" href="/aktuelles/<%= post.slug %>">Weiterlesen</a>
+</div>
+</article>

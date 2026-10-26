@@ -1,0 +1,31 @@
+<%- include('_top', { activePath: 'kaempfe' }) %>
+<div class="adm-head"><h1>Kämpfe</h1><a class="btn btn-primary" href="/admin/kaempfe/neu">Neuer Kampf</a></div>
+<form method="post" action="/admin/kaempfe/stand" class="box">
+<input type="hidden" name="_csrf" value="<%= csrf %>">
+<h2>Saison und Stand</h2>
+<div class="zeile">
+<div class="feld"><label for="season_label">Saison / Liga</label><input type="text" id="season_label" name="season_label" value="<%= s.season_label %>"></div>
+<div class="feld"><label for="results_stand">Stand (Datum, wird angezeigt)</label><input type="text" id="results_stand" name="results_stand" value="<%= s.results_stand %>"></div>
+</div>
+<div><button class="btn btn-primary btn-klein" type="submit">Speichern</button></div>
+</form>
+<div class="box">
+<p class="hint" style="font-size: 15px; color: var(--text-2)">Der nächste anstehende Kampf ohne Ergebnis erscheint als „Nächster Kampf“, der jüngste Kampf mit Ergebnis als „Letzter Kampf“ mit Einzelkämpfen.</p>
+<% if (matches.length) { %>
+<table class="liste">
+<thead><tr><th>Datum</th><th>Paarung</th><th>Kampftag</th><th>Ergebnis</th><th></th></tr></thead>
+<tbody>
+<% for (const m of matches) { %>
+<tr>
+<td><%= util.formatDateWd(m.date) %><%= m.time ? ', ' + m.time : '' %></td>
+<td><a class="titel" href="/admin/kaempfe/<%= m.id %>"><%= m.home %> – <%= m.away %></a></td>
+<td><%= m.kampftag %></td>
+<td><%= m.home_score != null ? m.home_score + ' : ' + m.away_score : 'offen' %></td>
+<td><a href="/admin/kaempfe/<%= m.id %>">Bearbeiten</a></td>
+</tr>
+<% } %>
+</tbody>
+</table>
+<% } else { %><p class="muted">Noch keine Kämpfe.</p><% } %>
+</div>
+<%- include('_bottom') %>

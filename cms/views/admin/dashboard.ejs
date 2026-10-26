@@ -1,0 +1,25 @@
+<%- include('_top', { activePath: '' }) %>
+<div class="adm-head"><h1>Übersicht</h1><a class="btn btn-primary" href="/admin/news/neu">Neuer Beitrag</a></div>
+<div class="stat-grid">
+<a class="stat" href="/admin/news"><span class="zahl"><%= stats.posts %></span><span class="lbl">Beiträge<%= stats.drafts ? ' · ' + stats.drafts + ' Entwurf' + (stats.drafts > 1 ? 'e' : '') : '' %></span></a>
+<a class="stat" href="/admin/kaempfe"><span class="zahl"><%= stats.matches %></span><span class="lbl">Kämpfe</span></a>
+<a class="stat" href="/admin/sponsoren"><span class="zahl"><%= stats.sponsors %></span><span class="lbl">Sponsoren</span></a>
+</div>
+<div class="box">
+<h2>Zuletzt bearbeitet</h2>
+<% if (recent.length) { %>
+<table class="liste">
+<thead><tr><th>Beitrag</th><th>Art</th><th>Datum</th><th>Status</th></tr></thead>
+<tbody>
+<% for (const p of recent) { %>
+<tr><td><a class="titel" href="/admin/news/<%= p.id %>"><%= p.title %></a></td><td><%= POST_TYPES[p.type] %></td><td><%= util.formatDate(p.date) %></td><td><%- p.published ? '<span class="online">Online</span>' : '<span class="entwurf">Entwurf</span>' %></td></tr>
+<% } %>
+</tbody>
+</table>
+<% } else { %><p class="muted">Noch keine Beiträge.</p><% } %>
+</div>
+<div class="box">
+<h2>Nach einem Kampf</h2>
+<p>1. Unter <a href="/admin/kaempfe">Kämpfe</a> das Ergebnis und die Einzelkämpfe eintragen, Stand-Datum anpassen.<br>2. Unter <a href="/admin/tabelle">Tabelle</a> die neuen Zahlen vom Verband übernehmen.<br>3. Einen <a href="/admin/news/neu">Kampfbericht</a> mit Foto schreiben und veröffentlichen.</p>
+</div>
+<%- include('_bottom') %>

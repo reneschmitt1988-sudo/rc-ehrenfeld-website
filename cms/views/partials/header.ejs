@@ -1,0 +1,24 @@
+<header class="header">
+<div class="wrap">
+<a class="brand" href="/"><img src="/assets/img/wappen.png" alt="Wappen des <%= s.site_name %>" width="300" height="327"><span>RC Ehrenfeld<br>1976 e.V.</span></a>
+<% if (path === '/') { %>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü öffnen">
+<svg class="burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+<svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</button>
+<nav class="nav" id="hauptmenue" aria-label="Hauptnavigation">
+<a href="#aktuelles">Aktuelles</a>
+<a href="#training">Training</a>
+<a href="#verein">Verein</a>
+<a href="#kaempfe">Kämpfe</a>
+<a href="#kontakt">Kontakt</a>
+<a class="btn btn-primary" href="#mitmachen">Probetraining</a>
+</nav>
+<% } else { %>
+<nav class="nav" id="hauptmenue" aria-label="Hauptnavigation" style="display: flex; position: static">
+<a href="/">Zur Startseite</a>
+<% if (path.startsWith('/aktuelles/')) { %><a href="/aktuelles">Alle Berichte</a><% } %>
+</nav>
+<% } %>
+</div>
+</header>

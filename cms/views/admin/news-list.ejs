@@ -1,0 +1,21 @@
+<%- include('_top', { activePath: 'news' }) %>
+<div class="adm-head"><h1>Beiträge</h1><a class="btn btn-primary" href="/admin/news/neu">Neuer Beitrag</a></div>
+<div class="box">
+<% if (posts.length) { %>
+<table class="liste">
+<thead><tr><th>Beitrag</th><th>Art</th><th>Datum</th><th>Status</th><th></th></tr></thead>
+<tbody>
+<% for (const p of posts) { %>
+<tr>
+<td><a class="titel" href="/admin/news/<%= p.id %>"><%= p.title %></a></td>
+<td><%= POST_TYPES[p.type] %></td>
+<td><%= util.formatDate(p.date) %></td>
+<td><%- p.published ? '<span class="online">Online</span>' : '<span class="entwurf">Entwurf</span>' %></td>
+<td><% if (p.published) { %><a href="/aktuelles/<%= p.slug %>" target="_blank" rel="noopener">Ansehen</a><% } %></td>
+</tr>
+<% } %>
+</tbody>
+</table>
+<% } else { %><p class="muted">Noch keine Beiträge. Leg den ersten an.</p><% } %>
+</div>
+<%- include('_bottom') %>
