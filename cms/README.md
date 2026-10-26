@@ -28,7 +28,7 @@ npm install
 export SESSION_SECRET=$(openssl rand -hex 32)
 npm run create-admin -- "Dein Name" du@rc-ehrenfeld.de einSicheresPasswort
 npm start
-# http://127.0.0.1:3010  und  http://127.0.0.1:3010/admin
+# http://127.0.0.1:3050  und  http://127.0.0.1:3050/admin
 ```
 
 Datenbank und Uploads landen in `cms/data/` (nicht im Git).

@@ -70,7 +70,7 @@ Inline-Styles nur für die zwei Trennlinien der Sektionen.
 
 ## Stufe 2 (gebaut, noch nicht deployed): eigenes CMS in cms/
 
-Node.js (Express) + better-sqlite3 + EJS, Port 3010 hinter nginx, systemd-Dienst.
+Node.js (Express) + better-sqlite3 + EJS, Port 3050 hinter nginx, systemd-Dienst.
 Alle Benutzer sind Admins (Entscheidung René, 26.10.2026). Module: Beiträge mit
 Foto (Entwurf/Veröffentlicht), Kämpfe mit Einzelkämpfen, Tabelle, Training,
 Trainer, Sponsoren, Vorstand, Einstellungen, Benutzer. Öffentliche Seiten werden
@@ -84,7 +84,7 @@ weiterhin nur nach Freigabe (offen).
 
 Entwicklung: `cd cms && SESSION_SECRET=$(openssl rand -hex 32) npm start`,
 Admin anlegen mit `npm run create-admin`. End-to-End-Test vor dem Push mit
-Playwright gegen http://127.0.0.1:3010 (Login, Beitrag mit Upload, Kampf,
+Playwright gegen http://127.0.0.1:3050 (Login, Beitrag mit Upload, Kampf,
 Tabelle, Einstellungen, CSRF, Logout).
 
 ## Arbeitsregeln
