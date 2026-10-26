@@ -212,7 +212,7 @@
 <thead><tr><th scope="col">Pl.</th><th scope="col">Mannschaft</th><th scope="col" class="c">K</th><th scope="col" class="c">S</th><th scope="col" class="c">U</th><th scope="col" class="c">N</th><th scope="col" class="r">Wertung</th><th scope="col" class="r">Punkte</th></tr></thead>
 <tbody>
 <% for (const r of league) { %>
-<tr<%= r.is_own ? ' class="rce"' : '' %>><td class="pl"><%= r.position %></td><td class="team"><% if (r.is_own) { %><img src="/assets/img/wappen.png" alt="" width="300" height="327"><span><%= r.team %></span><% } else { %><%= r.team %><% } %></td><td class="c"><%= r.played %></td><td class="c"><%= r.won %></td><td class="c"><%= r.drawn %></td><td class="c"><%= r.lost %></td><td class="r<%= r.is_own ? '' : ' wert' %>"><%= r.points_for %> : <%= r.points_against %></td><td class="r pkt"><%= r.table_points %></td></tr>
+<tr<%- r.is_own ? ' class="rce"' : '' %>><td class="pl"><%= r.position %></td><td class="team"><%= r.team %></td><td class="c"><%= r.played %></td><td class="c"><%= r.won %></td><td class="c"><%= r.drawn %></td><td class="c"><%= r.lost %></td><td class="r<%= r.is_own ? '' : ' wert' %>"><%= r.points_for %> : <%= r.points_against %></td><td class="r pkt"><%= r.table_points %></td></tr>
 <% } %>
 </tbody>
 </table>

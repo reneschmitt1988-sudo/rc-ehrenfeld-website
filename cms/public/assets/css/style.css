@@ -177,8 +177,7 @@ button { font: inherit; color: inherit; }
 .liga tbody tr:last-child { border-bottom: 0; }
 .liga tr.rce { background: var(--gelb); }
 .liga tr.rce td { font-weight: 600; }
-.liga tr.rce .team { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.liga tr.rce .team img { height: 28px; width: auto; }
+.liga tr.rce .team { font-weight: 700; }
 .tabelle-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
 
 /* Mitmachen */
