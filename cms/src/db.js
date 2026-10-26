@@ -147,7 +147,7 @@ if (count('settings') === 0) {
     hero_accent: 'Seit 1976.',
     hero_text: 'Der RC Ehrenfeld 1976 e.V. ist dein Ringerverein im Kölner Westen. Hier lernst du Kraft, Technik und Fairness auf der Matte – vom ersten Probetraining bis zum Mannschaftskampf.',
     hero_image: '',
-    meta_description: 'Der Ringer Club Ehrenfeld 1976 e.V. ist dein Ringerverein im Kölner Westen. Training für Ringerwiesel ab 5 Jahren, Jugend und Erwachsene in Köln-Ossendorf. Probetraining jederzeit möglich.',
+    meta_description: 'Der Ringer Club Ehrenfeld 1976 e.V. ist dein Ringerverein im Kölner Westen. Training für Ringerwiesel ab 5 Jahren, Jugend und Erwachsene in Köln-Vogelsang. Probetraining jederzeit möglich.',
     training_intro: 'Komm einfach vorbei und mach mit. Zum Schnuppern genügen bequeme Sportkleidung und etwas zu trinken. Mädchen und Frauen trainieren bei uns in allen Gruppen mit.',
     history_lead: '1976 wurde der Ringerclub Ehrenfeld von einer Handvoll Mitgliedern gegründet. Zum größten Teil waren das Eltern der Ringer, ältere Ringkampffreunde und ehemalige Ringer. Daran hat sich bis heute nichts geändert.',
     history_text: 'Mit durchschnittlich rund 50 Mitgliedern haben wir viel erreicht: Viele über die Grenzen NRWs hinaus bekannte Ringer begannen ihre Sportkarriere in Ehrenfeld. Einige wechselten in die Oberliga oder sogar die Bundesliga, spätere Deutsche Meister machten hier ihre ersten Schritte auf der Ringermatte.\n\nGeführt wird der RCE von den Familien van Rienen, Pelzer und Hemmerich. Alle Trainer und Vorstandsmitglieder erfüllen ihre Posten seit der Gründung unentgeltlich.',

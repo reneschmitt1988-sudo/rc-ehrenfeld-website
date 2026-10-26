@@ -43,7 +43,7 @@ Inline-Styles nur für die zwei Trennlinien der Sektionen.
 
 - Training: Ringerwiesel 5–7 J. Mo 17:15–18:15 (Wasseramselweg); Jugend 10–15 J.
   Mi 18–19 (Wasseramselweg), Fr 18–19 (Kolkrabenweg 65); Erwachsene Mo 18:30–20,
-  Mi 19:30–21 (Wasseramselweg), Fr 19:30–21 (Kolkrabenweg 65). Alle 50829 Köln.
+  Mi 19:30–21 (Wasseramselweg), Fr 19:30–21 (Kolkrabenweg 65). Alle 50829 Köln (Köln-Vogelsang).
   Mädchen und Frauen trainieren in allen Gruppen mit; keine eigene Frauengruppe.
 - Trainer: Senioren Melvin + Robin Pelzer; Jugend Yilmaz Kosar + Janine Hannes;
   Ringerwiesel Janine Hannes.
