@@ -13,7 +13,7 @@ Group=www-data
 WorkingDirectory=/var/www/rc-ehrenfeld/cms
 EnvironmentFile=/etc/rc-ehrenfeld-cms.env
 Environment=NODE_ENV=production
-Environment=PORT=3004
+Environment=PORT=3010
 Environment=DATA_DIR=/var/www/rc-ehrenfeld/cms/data
 ExecStart=/usr/bin/node server.js
 Restart=on-failure

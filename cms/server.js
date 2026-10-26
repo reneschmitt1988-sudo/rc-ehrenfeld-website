@@ -5,7 +5,7 @@ const cookieSession = require('cookie-session');
 const { DATA_DIR } = require('./src/db');
 const util = require('./src/util');
 
-const PORT = parseInt(process.env.PORT || '3004', 10);
+const PORT = parseInt(process.env.PORT || '3010', 10);
 const SECRET = process.env.SESSION_SECRET;
 if (!SECRET || SECRET.length < 32) {
   console.error('SESSION_SECRET fehlt oder ist zu kurz (mind. 32 Zeichen). Siehe README.');
